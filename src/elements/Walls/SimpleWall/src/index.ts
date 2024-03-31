@@ -155,6 +155,14 @@ export class SimpleWall extends Element {
         intersectionPoint?.y
       );
 
+      console.log(correctedIntersectionPoint);
+
+      // const distance1 = correctedIntersectionPoint.distanceTo(wall.endPoint);
+      const displacement1 = wall.direction.multiplyScalar(1.1);
+      wall.endPoint = correctedIntersectionPoint.clone().add(displacement1);
+
+      // wall.endPoint = correctedIntersectionPoint;
+
       wall.update(true);
       this.update(true);
 
@@ -177,11 +185,17 @@ export class SimpleWall extends Element {
     const distance5 = wall.startPoint.distanceTo(wall.midPoint);
     const distance6 = wall.startPoint.distanceTo(intersectionPoint);
 
+    console.log(distance3);
+    console.log(distance4);
+
+    console.log(distance5);
+    console.log(distance6);
+
     let sign1 = 1;
     let sign2 = 1;
 
     if (distance3 <= distance4 && distance5 <= distance6) {
-      sign1 = atTheEndPoint ? 1 : -1;
+      sign1 = atTheEndPoint ? 1 : 1;
       sign2 = atTheEndPoint ? 1 : -1;
     } else if (distance3 >= distance4 && distance5 >= distance6) {
       sign1 = -1;
