@@ -106,7 +106,6 @@ export class SimpleWall extends Element {
 
     this.updateGeometryID();
     super.update(updateGeometry);
-
     if (updateCorners) this.updateAllCorners();
   }
 
@@ -155,13 +154,16 @@ export class SimpleWall extends Element {
         intersectionPoint?.y
       );
 
-      console.log(correctedIntersectionPoint);
-
-      // const distance1 = correctedIntersectionPoint.distanceTo(wall.endPoint);
-      const displacement1 = wall.direction.multiplyScalar(1.1);
+      const displacement1 = wall.direction.clone().multiplyScalar(1.1);
       wall.endPoint = correctedIntersectionPoint.clone().add(displacement1);
 
-      // wall.endPoint = correctedIntersectionPoint;
+      const displacement2 = this.direction.clone().multiplyScalar(1.1);
+
+      if (atTheEndPoint) {
+        this.endPoint = correctedIntersectionPoint.clone().add(displacement2);
+      } else {
+        this.startPoint = correctedIntersectionPoint.clone().add(displacement2);
+      }
 
       wall.update(true);
       this.update(true);
@@ -184,12 +186,6 @@ export class SimpleWall extends Element {
 
     const distance5 = wall.startPoint.distanceTo(wall.midPoint);
     const distance6 = wall.startPoint.distanceTo(intersectionPoint);
-
-    console.log(distance3);
-    console.log(distance4);
-
-    console.log(distance5);
-    console.log(distance6);
 
     let sign1 = 1;
     let sign2 = 1;

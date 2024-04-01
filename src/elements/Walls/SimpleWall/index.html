@@ -109,18 +109,18 @@
   // wall.update(true);
 
   wall.startPoint.x = 0;
-  wall.startPoint.y = -15;
+  wall.startPoint.y = 0;
   wall.endPoint.x = 0;
-  wall.endPoint.y = 0;
+  wall.endPoint.y = 2;
   wall.update(true);
 
   wall2.startPoint.x = 35;
-  wall2.startPoint.y = -15;
+  wall2.startPoint.y = 15;
   wall2.endPoint.x = 3;
-  wall2.endPoint.y = -15;
+  wall2.endPoint.y = 15;
   wall2.update(true);
 
-  wall.addCorner(wall2, false); //at the end point => true
+  wall.addCorner(wall2, true); //at the end point => true
   wall.update(true);
 
   window.addEventListener("keydown", () => {
@@ -168,7 +168,7 @@
     .min(-15)
     .max(15)
     .step(0.1)
-    .onChange(() => {
+    .onChange(async () => {
       wall.update(true, true);
     });
 
